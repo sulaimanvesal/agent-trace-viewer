@@ -1,0 +1,2 @@
+# Development / test only. The package itself is stdlib-only.
+pytest>=7
