@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: research agent trace</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 0;
+       padding: 24px; max-width: 1100px; margin-inline: auto; line-height: 1.5; }
+h1 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+.sub { color: #888; margin-bottom: 1.2rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+         gap: 12px; margin-bottom: 1.6rem; }
+.card { border: 1px solid #ddd; border-radius: 10px; padding: 12px 14px; }
+.card .k { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; }
+.card .v { font-size: 1.35rem; font-weight: 650; }
+section { margin-bottom: 1.8rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: #f4f4f5; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; color: #fff;
+         font-size: 0.75rem; font-weight: 600; }
+details { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 8px; }
+summary { padding: 10px 12px; cursor: pointer; font-size: 0.92rem; }
+.stepbody { padding: 0 12px 12px 12px; font-size: 0.88rem; }
+pre { background: #f6f8fa; padding: 10px; border-radius: 6px; overflow-x: auto;
+      font-size: 0.82rem; white-space: pre-wrap; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+</style>
+</head>
+<body>
+<h1>Demo: research agent trace</h1>
+<div class="sub">generated 2026-09-25 00:04 · 13 events</div>
+<section><div class="cards"><div class='card'><div class='k'>steps</div><div class='v'>13</div></div><div class='card'><div class='k'>events</div><div class='v'>13</div></div><div class='card'><div class='k'>tool calls</div><div class='v'>3</div></div><div class='card'><div class='k'>errors</div><div class='v'>1</div></div><div class='card'><div class='k'>tokens in / out</div><div class='v'>5,070 / 1,520</div></div><div class='card'><div class='k'>LLM latency</div><div class='v'>6.41 s</div></div><div class='card'><div class='k'>wall time</div><div class='v'>8.24 s</div></div></div></section>
+<section><h2>Latency waterfall</h2><svg width="900" height="114" viewBox="0 0 900 114" role="img" aria-label="per-step latency waterfall"><text x="0" y="25" font-size="12">step 3 · web_search</text><rect x="200" y="14" width="490.7" height="14" rx="3" fill="#2f9e6e"/><text x="696.7" y="25" font-size="12" fill="#888">1.84 s</text><text x="0" y="51" font-size="12">step 6 · web_search</text><rect x="200" y="40" width="322.7" height="14" rx="3" fill="#2f9e6e"/><text x="528.7" y="51" font-size="12" fill="#888">1.21 s</text><text x="0" y="77" font-size="12">step 9 · web_search</text><rect x="200" y="66" width="256.0" height="14" rx="3" fill="#2f9e6e"/><text x="462.0" y="77" font-size="12" fill="#888">960 ms</text><text x="0" y="103" font-size="12">step 13 · final_answer</text><rect x="200" y="92" width="640.0" height="14" rx="3" fill="#1f6feb"/><text x="846.0" y="103" font-size="12" fill="#888">2.40 s</text></svg></section>
+<section><h2>Tool usage</h2><table><tr><th>tool</th><th>calls</th></tr><tr><td><code>web_search</code></td><td>3</td></tr></table></section>
+<section><h2>Slowest steps</h2><table><tr><th>step</th><th>tool / event</th><th>latency</th></tr><tr><td>13</td><td><code>final_answer</code></td><td>2.40 s</td></tr><tr><td>3</td><td><code>web_search</code></td><td>1.84 s</td></tr><tr><td>6</td><td><code>web_search</code></td><td>1.21 s</td></tr><tr><td>9</td><td><code>web_search</code></td><td>960 ms</td></tr></table></section>
+<section><h2>Step timeline</h2><details><summary><span class="dot" style="background:#6e7781"></span><b>step 1</b> <span class="badge" style="background:#6e7781">user</span></summary><div class='stepbody'><pre>Compare vector DB options for a RAG prototype.</pre><div style='color:#888'>at 2026-09-24T17:00:00.647599+00:00</div></div></details><details><summary><span class="dot" style="background:#7c6ff0"></span><b>step 2</b> <span class="badge" style="background:#7c6ff0">thought</span></summary><div class='stepbody'><pre>I should search for current vector DB benchmarks and pricing.</pre><div style='color:#888'>at 2026-09-24T17:00:00.865106+00:00</div></div></details><details><summary><span class="dot" style="background:#2f9e6e"></span><b>step 3</b> <span class="badge" style="background:#2f9e6e">tool_call</span> <code>web_search</code> <span style='color:#888'>· 1.84 s</span> <span style='color:#888'>· 1630 tok</span></summary><div class='stepbody'><b>args</b><pre>{
+  &quot;query&quot;: &quot;vector database benchmark 2026 recall latency&quot;
+}</pre><div style='color:#888'>at 2026-09-24T17:00:02.705106+00:00 · tokens in=1250 out=380</div></div></details><details><summary><span class="dot" style="background:#c98a1b"></span><b>step 4</b> <span class="badge" style="background:#c98a1b">observation</span> <code>web_search</code></summary><div class='stepbody'><pre>Top hits: pgvector, Qdrant, Weaviate, Milvus. Benchmarks show ...</pre><div style='color:#888'>at 2026-09-24T17:00:02.755106+00:00</div></div></details><details><summary><span class="dot" style="background:#7c6ff0"></span><b>step 5</b> <span class="badge" style="background:#7c6ff0">thought</span></summary><div class='stepbody'><pre>Good overview. Now check pricing pages for the hosted options.</pre><div style='color:#888'>at 2026-09-24T17:00:03.147627+00:00</div></div></details><details><summary><span class="dot" style="background:#2f9e6e"></span><b>step 6</b> <span class="badge" style="background:#2f9e6e">tool_call</span> <code>web_search</code> <span style='color:#888'>· 1.21 s</span> <span style='color:#888'>· 1160 tok</span></summary><div class='stepbody'><b>args</b><pre>{
+  &quot;query&quot;: &quot;qdrant cloud pricing vs weaviate pricing 2026&quot;
+}</pre><div style='color:#888'>at 2026-09-24T17:00:04.357627+00:00 · tokens in=900 out=260</div></div></details><details><summary><span class="dot" style="background:#c98a1b"></span><b>step 7</b> <span class="badge" style="background:#c98a1b">observation</span> <code>web_search</code></summary><div class='stepbody'><pre>Qdrant Cloud from $25/mo; Weaviate Cloud from $25/mo; ...</pre><div style='color:#888'>at 2026-09-24T17:00:04.407627+00:00</div></div></details><details><summary><span class="dot" style="background:#7c6ff0"></span><b>step 8</b> <span class="badge" style="background:#7c6ff0">thought</span></summary><div class='stepbody'><pre>I have enough for a comparison table. Let me verify the pgvector HNSW claim.</pre><div style='color:#888'>at 2026-09-24T17:00:04.763874+00:00</div></div></details><details><summary><span class="dot" style="background:#2f9e6e"></span><b>step 9</b> <span class="badge" style="background:#2f9e6e">tool_call</span> <code>web_search</code> <span style='color:#888'>· 960 ms</span> <span style='color:#888'>· 1060 tok</span></summary><div class='stepbody'><b>args</b><pre>{
+  &quot;query&quot;: &quot;pgvector HNSW recall benchmark&quot;
+}</pre><div style='color:#888'>at 2026-09-24T17:00:05.723874+00:00 · tokens in=820 out=240</div></div></details><details><summary><span class="dot" style="background:#c98a1b"></span><b>step 10</b> <span class="badge" style="background:#c98a1b">observation</span> <code>web_search</code></summary><div class='stepbody'><pre>pgvector HNSW recall@10 ~0.97 on 1M vectors ...</pre><div style='color:#888'>at 2026-09-24T17:00:05.773874+00:00</div></div></details><details><summary><span class="dot" style="background:#d64545"></span><b>step 11</b> <span class="badge" style="background:#d64545">error</span></summary><div class='stepbody'><pre>calculator plugin unavailable, falling back to mental math</pre><div style='color:#888'>at 2026-09-24T17:00:05.773874+00:00</div></div></details><details><summary><span class="dot" style="background:#7c6ff0"></span><b>step 12</b> <span class="badge" style="background:#7c6ff0">thought</span></summary><div class='stepbody'><pre>Compiling the final comparison now.</pre><div style='color:#888'>at 2026-09-24T17:00:06.489404+00:00</div></div></details><details><summary><span class="dot" style="background:#1f6feb"></span><b>step 13</b> <span class="badge" style="background:#1f6feb">final_answer</span> <span style='color:#888'>· 2.40 s</span> <span style='color:#888'>· 2740 tok</span></summary><div class='stepbody'><pre>## Vector DB comparison
+
+| DB | Recall@10 | Latency p50 | Hosted from |
+|---|---|---|---|
+| pgvector (HNSW) | 0.97 | 8 ms | self-host |
+| Qdrant | 0.98 | 5 ms | $25/mo |
+| Weaviate | 0.97 | 6 ms | $25/mo |
+| Milvus | 0.98 | 4 ms | self-host |
+
+Recommendation: start with pgvector ...</pre><div style='color:#888'>at 2026-09-24T17:00:08.889404+00:00 · tokens in=2100 out=640</div></div></details></section>
+</body>
+</html>
